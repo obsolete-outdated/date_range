@@ -1,0 +1,13 @@
+name: date_range
+description: A simple way to find a daterange in which a datetime is
+version: 1.0.0
+author: Subbotin Aleksei <darkandjeweled@gmail.com>
+homepage: https://github.com/Moonspeaker/date_range
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+
+dev_dependencies:
+  test: ^1.9.3
