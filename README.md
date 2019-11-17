@@ -1,6 +1,6 @@
 # date_range
 
-A simple way to find a daterange in which a datetime is.
+A simple way to find a daterange in which a datetime is. Used for db queries.
 
 ## Getting Started
 
