@@ -9,7 +9,7 @@ class DateRange{
 DateTime _lastMonthDateTime(final DateTime firstDateTime){
   switch(firstDateTime.month){
     case DateTime.december:
-      return DateTime(firstDateTime.year+1, 1);
+      return DateTime(firstDateTime.year+1, DateTime.january);
     default:
       return DateTime(firstDateTime.year, firstDateTime.month+1);
   }
