@@ -5,6 +5,40 @@ class DateRange{
   final DateTime lastDateTime;
   const DateRange(this.firstDateTime, this.lastDateTime);
 
+  DateRange.month(final DateTime inner) :
+      firstDateTime = DateTime(inner.year, inner.month),
+  lastDateTime = DateTime(inner.year, inner.month, daysInMonthOfDateTime(inner), 23, 59, 59, 999, 999);
+
+  // ignore: missing_return
+  static int daysInMonthOfDateTime(final DateTime dateTime){
+    switch(dateTime.month){
+      case DateTime.january:
+      case DateTime.march:
+      case DateTime.may:
+      case DateTime.july:
+      case DateTime.august:
+      case DateTime.october:
+      case DateTime.december:
+        return thirtyOneDays;
+      case DateTime.april:
+      case DateTime.june:
+      case DateTime.september:
+      case DateTime.november :
+        return thirtyDays;
+      case DateTime.february:
+        if(dateTime.year%4 == 0){
+          return twentyNineDays;
+        } else {
+          return twentyEightDays;
+        }
+    }
+  }
+
+  static const int thirtyOneDays = 31;
+  static const int thirtyDays = 30;
+  static const int twentyNineDays = 29;
+  static const int twentyEightDays = 28;
+
   // ignore: missing_return
   String get month {
     final DateTime dateTime = firstDateTime.add(const Duration(days: 13));
@@ -37,21 +71,4 @@ class DateRange{
   }
 
   int get year => firstDateTime.add(const Duration(days: 13)).year;
-}
-
-DateTime _lastMonthDateTime(final DateTime firstDateTime){
-  switch(firstDateTime.month){
-    case DateTime.december:
-      return DateTime(firstDateTime.year+1, DateTime.january);
-    default:
-      return DateTime(firstDateTime.year, firstDateTime.month+1);
-  }
-}
-
-DateRange monthDateRange(final DateTime dateTime){
-  final DateTime firstDateTime = DateTime(dateTime.year, dateTime.month);
-  return DateRange(
-    firstDateTime,
-    _lastMonthDateTime(firstDateTime),
-  );
 }
