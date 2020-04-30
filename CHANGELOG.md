@@ -1,3 +1,5 @@
+## [1.0.5] - Added lastDateTimeByDay function
+
 ## [1.0.4] - Added update function
 
 ## [1.0.3] - Notation changed to match Dart guidelines.

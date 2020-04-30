@@ -10,9 +10,11 @@ class DateRange{
     lastDateTime ?? this.lastDateTime,
   );
 
+  static DateTime lastDateTimeByDay(final int year, final int month, final int day) => DateTime(year, month, day, 23, 59, 59, 999, 999);
+
   DateRange.month(final DateTime inner) :
         firstDateTime = DateTime(inner.year, inner.month),
-        lastDateTime = DateTime(inner.year, inner.month, daysInMonthOfDateTime(inner), 23, 59, 59, 999, 999);
+        lastDateTime = lastDateTimeByDay(inner.year, inner.month, daysInMonthOfDateTime(inner));
 
   // ignore: missing_return
   static int daysInMonthOfDateTime(final DateTime dateTime){

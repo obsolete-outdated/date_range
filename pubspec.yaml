@@ -1,6 +1,6 @@
 name: date_range
 description: A simple way to find a daterange in which a datetime is. Used for db queries.
-version: 1.0.4
+version: 1.0.5
 author: Subbotin Aleksei <darkandjeweled@gmail.com>
 homepage: https://github.com/Moonspeaker/date_range
 
