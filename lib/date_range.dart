@@ -5,9 +5,14 @@ class DateRange{
   final DateTime lastDateTime;
   const DateRange(this.firstDateTime, this.lastDateTime);
 
+  DateRange update({final DateTime firstDateTime, final DateTime lastDateTime}) => DateRange(
+    firstDateTime ?? this.firstDateTime,
+    lastDateTime ?? this.lastDateTime,
+  );
+
   DateRange.month(final DateTime inner) :
-      firstDateTime = DateTime(inner.year, inner.month),
-  lastDateTime = DateTime(inner.year, inner.month, daysInMonthOfDateTime(inner), 23, 59, 59, 999, 999);
+        firstDateTime = DateTime(inner.year, inner.month),
+        lastDateTime = DateTime(inner.year, inner.month, daysInMonthOfDateTime(inner), 23, 59, 59, 999, 999);
 
   // ignore: missing_return
   static int daysInMonthOfDateTime(final DateTime dateTime){

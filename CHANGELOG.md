@@ -1,3 +1,5 @@
+## [1.0.4] - Added update function
+
 ## [1.0.3] - Notation changed to match Dart guidelines.
 
 DateRange's lastDateTime now represents the final microsecond of the date range instead of the first instance of the next date range.
