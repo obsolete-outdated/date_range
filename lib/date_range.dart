@@ -18,6 +18,7 @@ class DateRange{
         firstDateTime = DateTime(inner.year, inner.month),
         lastDateTime = lastDateTimeByDay(inner.year, inner.month, daysInMonthOfDateTime(inner));
 
+  //ToDo replace with switch. switch((month + 2) ~/ 3) for season, switch(month ~/3) for quarter
   // ignore: missing_return
   factory DateRange.season(final DateTime inner){ //ToDo untested
     final int month = inner.month;
