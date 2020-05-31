@@ -12,9 +12,45 @@ class DateRange{
 
   static DateTime lastDateTimeByDay(final int year, final int month, final int day) => DateTime(year, month, day, 23, 59, 59, 999, 999);
 
+  const DateRange._(this.firstDateTime, this.lastDateTime);
+
   DateRange.month(final DateTime inner) :
         firstDateTime = DateTime(inner.year, inner.month),
         lastDateTime = lastDateTimeByDay(inner.year, inner.month, daysInMonthOfDateTime(inner));
+
+  // ignore: missing_return
+  factory DateRange.season(final DateTime inner){ //ToDo untested
+    final int month = inner.month;
+    final int year = inner.year;
+    //ToDo in reverse-order search, could simplify 3 out of 4 if clauses.
+    if(month >= DateTime.december && month <= DateTime.february){
+      final int lastMonth = DateTime.february;
+      return DateRange._(
+        DateTime(year, DateTime.december),
+        lastDateTimeByDay(year, lastMonth, daysInMonthOfDateTime(DateTime(year,lastMonth))),
+      );
+    } else if(month >= DateTime.june && month <= DateTime.august){
+      final int lastMonth = DateTime.august;
+      return DateRange._(
+        DateTime(year, DateTime.june),
+        lastDateTimeByDay(year, lastMonth, daysInMonthOfDateTime(DateTime(year,lastMonth))),
+      );
+    } if(month >= DateTime.march && month <= DateTime.may){
+      final int lastMonth = DateTime.may;
+      return DateRange._(
+        DateTime(year, DateTime.march),
+        lastDateTimeByDay(year, lastMonth, daysInMonthOfDateTime(DateTime(year,lastMonth))),
+      );
+    } else {
+      final int lastMonth = DateTime.november;
+      return DateRange._(
+        DateTime(year, DateTime.september),
+        lastDateTimeByDay(year, lastMonth, daysInMonthOfDateTime(DateTime(year, lastMonth))),
+      );
+    }
+  }
+
+  int get days => daysInMonthOfDateTime(firstDateTime);
 
   // ignore: missing_return
   static int daysInMonthOfDateTime(final DateTime dateTime){
@@ -30,7 +66,7 @@ class DateRange{
       case DateTime.april:
       case DateTime.june:
       case DateTime.september:
-      case DateTime.november :
+      case DateTime.november:
         return thirtyDays;
       case DateTime.february:
         if(dateTime.year%4 == 0){
@@ -78,4 +114,17 @@ class DateRange{
   }
 
   int get year => firstDateTime.add(const Duration(days: 13)).year;
+
+  @override
+  int get hashCode => firstDateTime.millisecondsSinceEpoch & lastDateTime.millisecondsSinceEpoch;
+
+  @override
+  bool operator ==(final dynamic other) {
+    if(other.runtimeType == DateRange){
+      final DateRange otherAsDR = other as DateRange;
+      return otherAsDR.firstDateTime == firstDateTime && otherAsDR.lastDateTime == lastDateTime;
+    } else {
+      return false;
+    }
+  }
 }
